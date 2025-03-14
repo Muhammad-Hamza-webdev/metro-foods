@@ -62,32 +62,22 @@
               Help!</span
             >
             <input
-              type="text"
-              name="full-name"
-              id="full-name"
-              placeholder="Full Name"
-              required
-            />
-            <input
               type="email"
               name="email-address"
               id="email-address"
               placeholder="Email Address"
               required
             />
-            <input
-              type="tel"
-              name="phone-number"
-              id="phone-number"
-              placeholder="Phone Number"
-              required
-            />
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Message"
-              required
-            ></textarea>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                name="email-password"
+                id="email-password"
+                placeholder="Password"
+                required
+              />
+              <ion-icon id="toggle-password" name="eye"></ion-icon>
+            </div>
             <div class="button-area">
               <img src="assets/images/recaptcha.png" alt="recaptcha" />
               <button type="submit">
@@ -155,15 +145,25 @@
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("input[required]").forEach((input) => {
+        input.addEventListener("input", () => validateField(input));
+      });
+
       document
-        .querySelectorAll("input[required], textarea[required]")
-        .forEach((input) => {
-          input.addEventListener("input", () => validateField(input));
+        .getElementById("toggle-password")
+        .addEventListener("click", function () {
+          const passwordField = document.getElementById("email-password");
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            this.setAttribute("name", "eye");
+          } else {
+            passwordField.type = "password";
+            this.setAttribute("name", "eye-off");
+          }
         });
 
       function validateField(field) {
         if (field.type === "email") validateEmail(field);
-        else if (field.type === "tel") validatePhone(field);
         else validateRequired(field);
       }
 
@@ -175,13 +175,6 @@
 
       function validateEmail(field) {
         field.style.borderBottom = /@.+\./.test(field.value)
-          ? "1px solid green"
-          : "1px solid red";
-      }
-
-      function validatePhone(field) {
-        field.value = field.value.replace(/[^0-9+()\- ]/g, "");
-        field.style.borderBottom = field.value
           ? "1px solid green"
           : "1px solid red";
       }
