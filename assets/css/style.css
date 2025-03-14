@@ -72,12 +72,12 @@
   background-size: contain;
   height: 390px;
   position: relative;
-  img {
+  /* img {
     position: absolute;
     left: 8%;
     top: 28%;
     width: 160px;
-  }
+  } */
   .container {
     max-width: 1400px;
     width: 96%;
@@ -311,9 +311,9 @@
   /* hero code */
   .hero-mainBox {
     height: 155px;
-    img {
+    /* img {
       width: 120px;
-    }
+    } */
     .container {
       .hero-section {
         h1 {
@@ -361,9 +361,9 @@
   .hero-mainBox {
     background-size: cover;
     background-position: center right;
-    img {
+    /* img {
       width: 60px;
-    }
+    } */
   }
   /* form code */
   .form-mainBox {
